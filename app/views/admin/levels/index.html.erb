@@ -1,0 +1,31 @@
+<h1>Listing levels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Title</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @levels.each do |level| %>
+      <tr>
+        <td><%= level.rank %></td>
+        <td><%= level.name %></td>
+        <td><%= level.title %></td>
+        <td><%= link_to 'Show', [:admin, level] %></td>
+        <td><%= link_to 'Edit', edit_admin_level_path(level) %></td>
+        <td><%= link_to 'Destroy', [:admin, level], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Level', new_admin_level_path %>

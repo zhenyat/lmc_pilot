@@ -1,0 +1,33 @@
+<h1>Listing clusters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Mutual</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clusters.each do |cluster| %>
+      <tr>
+        <td><%= cluster.name %></td>
+        <td><%= cluster.title %></td>
+        <td><%= cluster.mutual %></td>
+        <td><%= cluster.description %></td>
+        <td><%= link_to 'Show', [:admin, cluster] %></td>
+        <td><%= link_to 'Edit', edit_admin_cluster_path(cluster) %></td>
+        <td><%= link_to 'Destroy', [:admin, cluster], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cluster', new_admin_cluster_path %>

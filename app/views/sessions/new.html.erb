@@ -1,0 +1,19 @@
+<% provide(:title, "Sign in") %>
+<h1>Вход в систему</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+      <%= f.label :login %>
+      <%= f.text_field :login %>
+    <br>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    <br>
+      <%= f.submit "Вход", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<br>
+<p>Для получения доступа в систему обратитесь к ...</p>

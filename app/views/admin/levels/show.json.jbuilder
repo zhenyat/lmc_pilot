@@ -1,0 +1,1 @@
+json.extract! @level, :rank, :name, :title, :created_at, :updated_at

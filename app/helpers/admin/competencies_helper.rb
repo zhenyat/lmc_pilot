@@ -1,0 +1,2 @@
+module Admin::CompetenciesHelper
+end

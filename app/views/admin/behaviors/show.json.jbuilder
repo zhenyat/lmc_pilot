@@ -1,0 +1,1 @@
+json.extract! @behavior, :competency_id, :level_id, :content, :active, :created_at, :updated_at

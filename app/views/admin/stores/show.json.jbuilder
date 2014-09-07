@@ -1,0 +1,1 @@
+json.extract! @store, :name, :title, :created_at, :updated_at

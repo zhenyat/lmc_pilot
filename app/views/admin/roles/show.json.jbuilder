@@ -1,0 +1,1 @@
+json.extract! @role, :name, :title, :created_at, :updated_at

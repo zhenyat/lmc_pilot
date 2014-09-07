@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Competency:</strong>
+  <%= @behavior.competency_id %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @behavior.level_id %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @behavior.content %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @behavior.active %>
+</p>
+
+<%= link_to 'Edit', edit_admin_behavior_path(@behavior) %> |
+<%= link_to 'Back', admin_behaviors_path %>

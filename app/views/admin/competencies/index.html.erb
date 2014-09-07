@@ -1,0 +1,37 @@
+<h1>Listing competencies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Cluster</th>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Rank</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @competencies.each do |competency| %>
+      <tr>
+        <td><%= competency.position_id %></td>
+        <td><%= competency.cluster_id %></td>
+        <td><%= competency.name %></td>
+        <td><%= competency.title %></td>
+        <td><%= competency.rank %></td>
+        <td><%= competency.description %></td>
+        <td><%= link_to 'Show', [:admin, competency] %></td>
+        <td><%= link_to 'Edit', edit_admin_competency_path(competency) %></td>
+        <td><%= link_to 'Destroy', [:admin, competency], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Competency', new_admin_competency_path %>

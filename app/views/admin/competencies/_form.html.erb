@@ -1,0 +1,41 @@
+<%= form_for([:admin, @competency]) do |f| %>
+  <% if @competency.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@competency.errors.count, "error") %> prohibited this competency from being saved:</h2>
+
+      <ul>
+      <% @competency.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :position_id %><br>
+    <%= f.number_field :position_id %>
+    </div>
+  <div class="field">
+      <%= f.label :cluster_id %><br>
+    <%= f.number_field :cluster_id %>
+    </div>
+  <div class="field">
+      <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    </div>
+  <div class="field">
+      <%= f.label :title %><br>
+    <%= f.text_field :title %>
+    </div>
+  <div class="field">
+      <%= f.label :rank %><br>
+    <%= f.number_field :rank %>
+    </div>
+  <div class="field">
+      <%= f.label :description %><br>
+    <%= f.text_field :description %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

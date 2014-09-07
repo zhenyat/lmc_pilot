@@ -1,0 +1,1 @@
+json.extract! @department, :number, :title, :created_at, :updated_at
