@@ -1,0 +1,111 @@
+<p id="notice"><%= notice %></p>
+<h1>Результат  БОРД</h1>
+<%= render 'chunks/user_data' %>
+
+<% Cluster.all.each do |cluster| %>
+  <% competencies_total = cluster.competencies.where(position_id: @user.position.id).count %>
+  <% if competencies_total > 0%>
+    <h2>Блок компетенций: <%= cluster.title %></h2>
+    <% if cluster.mutual? %>
+      <table class='ztResult' >
+        <thead>
+          <th>Компетенция</th>
+          <th class='content'>Индикатор</th>
+          <th>Сот</th>
+          <th>Итог</th>
+        </thead>
+        <tbody>
+          <% for v in 1..@matrix.size - 1 %>    <%# First element matrix[0] is nil %>
+            <% rows_spanned = 0 %>
+            <% @matrix[v].each do |row| %>
+              <% unless row.nil? %>
+                <% rows_spanned += 1 if row[0] == cluster.name %>
+              <% end %>
+            <% end %>
+            <% rowspan_flag = 1 %>
+
+            <% @matrix[v].each do |row| %>
+              <% unless row.nil? %>
+                <% if row[0] == cluster.name %>
+                  <% k = 2 + 3*(@user.level.id - 1) %>
+                  <tr>
+                    <% if rowspan_flag == 1 %>
+                      <td class='rowspan' rowspan="<%= rows_spanned %> "><%= row[1] %></td>
+                      <% rowspan_flag = 0 %>
+                    <% end %>
+                    <td class='content'><%= row[k] %></td>
+                    <td class="cb"><%= row[k+1] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= row[k+2] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>       <%# matrix Loop%>
+          <% end %>         <%# v Loop%>
+        </tbody>
+      </table>
+    <% else %>
+      <table class='ztResult'>
+        <thead>
+          <tr>
+            <th rowspan='2'>Компетенция</th>
+            <th colspan='3'>Начинающий</th>
+            <th colspan='3'>Специалист</th>
+            <th colspan='3'>Профессионал</th>
+            <th colspan='3'>Эксперт</th>
+          </tr>
+          <tr>
+            <th class='content'>Индикатор</th>
+            <th>Сот</th>
+            <th>Итог</th>
+            <th>Индикатор</th>
+            <th>Сот</th>
+            <th>Итог</th>
+            <th>Индикатор</th>
+            <th>Сот</th>
+            <th>Итог</th>
+            <th>Индикатор</th>
+            <th>Сот</th>
+            <th>Итог</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for v in 1..@matrix.size - 1 %>    <%# First element matrix[0] is nil %>
+            <% rows_spanned = 0 %>
+            <% @matrix[v].each do |row| %>
+              <% unless row.nil? %>
+                <% rows_spanned += 1 if row[0] == cluster.name %>
+              <% end %>
+            <% end %>
+            <% rowspan_flag = 1 %>
+
+            <% @matrix[v].each do |row| %>
+              <% unless row.nil? %>
+                <% if row[0] == cluster.name%>
+                  <tr>
+                    <% if rowspan_flag == 1 %>
+                      <td class='rowspan' rowspan="<%= rows_spanned %> "><%= row[1] %></td>
+                      <% rowspan_flag = 0 %>
+                    <% end %>
+                    <td class='content'><%= row[2] %></td>
+                    <td class="cb"><%= row[3] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= row[4] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class='content'><%= row[5] %></td>
+                    <td class="cb"><%= row[6] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= row[7] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class='content'><%= row[8] %></td>
+                    <td class="cb"><%= row[9] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= row[10] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class='content'><%= row[11] %></td>
+                    <td class="cb"><%= row[12] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= row[13] == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+<% end %>
+

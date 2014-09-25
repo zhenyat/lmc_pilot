@@ -1,0 +1,101 @@
+// Place all the styles related to the Assessments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*********************************************
+ *  table.css
+ *
+ *  Last update: 14.02.2011
+ *  12.04.2014   Updated for LVC Project
+ *  28.04.2014 Updated (correleation of styles from both sources)
+ *********************************************/
+.ztResult {
+    /*width:          1650px;*/
+    /*margin:         0 auto;*/
+    color:          #2a2a2a;
+    border-radius:  10px;
+}
+
+.ztResult thead, tfoot {
+    height:         50px;
+    font:           bold 0.9em Verdana;
+
+}
+.ztResult th {
+    padding:        5px 10px 5px 10px;
+  /*border-bottom:  1px solid #cdcdcd;*/   /*not OK for IE8 */
+    border:         1px solid green;
+    background:     #aacfaa;
+}
+
+.ztResult th:first-child {                   /* redundant here... */
+    padding:        5px 10px 5px 10px;
+}
+
+.ztResult tr:nth-child(odd) {
+    background:     #D3E6D3;
+}
+
+.ztResult tr:nth-child(even) {
+    background:     #d1e5e5;
+}
+
+.ztResult td {
+    width:          200px;
+    height:         30px;
+    line-height:    20px;
+    padding:        0 10px;
+/*  border-bottom:  1px solid green;  /*not OK for IE8 */
+    border:         1px solid green;  /* IE8  */
+    text-align:     left;
+    font-size:      10px
+}
+.ztResult td.common {
+    width:          50px;
+}
+.ztResult td.rowspan {
+    font-weight:    bold;
+    text-align:     center;
+    font-size:      16px
+}
+.ztResult td.content {
+    width:          500px;
+    text-align:     left;
+    line-height:    20px;
+    white-space:    normal;
+}
+.ztResult td.fio {
+    width:          300px;
+}
+.ztResult td.status {
+    text-align:     center;
+}
+
+.ztResult td.buttons {
+
+    width:          70px;
+    text-align:     center;
+    line-height:    10px;
+}
+.ztResult td.cb {
+    width:          20px;
+    line-height:    10px;
+}
+.ztBtn {
+    margin:         10px auto;
+    font-family:    Verdana, Arial;
+    font-size:      16px;
+    color:          white;
+    padding:        5px 15px 5px 15px;
+    border-radius:  5px;
+    text-shadow:    1px 1px 3px #666666;
+    border:         solid #235d3e 2px;
+    background:     -webkit-gradient(linear, 0 0, 0 100%, from(#659865), to(#235d3e));
+    background:     -moz-linear-gradient(top, #659865, #235d3e);
+    -ms-filter:     progid:DXImageTransform.Microsoft.gradient(startColorStr=#659865, endColorStr=#235d3e);
+    filter:         progid:DXImageTransform.Microsoft.gradient(startColorStr=#659865, endColorStr=#235d3e);
+    display:        inline-block; /* IE is so silly */
+}
+
+.ztBtn:hover {
+  background: #235d3e;
+}

@@ -1,14 +1,12 @@
-<h1>Listing levels</h1>
+<h1>Список уровней компетенции</h1>
 
-<table>
+<table class="ztTable">
   <thead>
     <tr>
-      <th>Rank</th>
+      <th>Ранг</th>
       <th>Name</th>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Название</th>
+      <th>Действия</th>
     </tr>
   </thead>
 
@@ -18,9 +16,11 @@
         <td><%= level.rank %></td>
         <td><%= level.name %></td>
         <td><%= level.title %></td>
-        <td><%= link_to 'Show', [:admin, level] %></td>
-        <td><%= link_to 'Edit', edit_admin_level_path(level) %></td>
-        <td><%= link_to 'Destroy', [:admin, level], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="buttons">
+          <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, level] %>&nbsp;
+          <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_level_path(level) %>&nbsp;
+          <%= link_to image_tag('buttons/delete.png', alt: 'destroy', title: 'destroy'), [:admin, level], method: :delete, data: {confirm: 'Вы уверены?'} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Level', new_admin_level_path %>
+<%= link_to 'Добавить', new_admin_level_path %>

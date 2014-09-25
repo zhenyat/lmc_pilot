@@ -1,4 +1,5 @@
 class Admin::PositionsController < ApplicationController
+  layout 'admin'
   before_action :set_position, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/positions

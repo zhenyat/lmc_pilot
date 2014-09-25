@@ -1,0 +1,13 @@
+<%# Displays User personal data %>
+<table>
+  <tr><td>ФИО:       </td><td><strong><%= @user.full_name %></strong></td></tr>
+  <tr>
+    <td>Магазин:     </td><td><strong><%= @user.store.title %></strong></td>
+    <td>Отдел:       </td><td><strong><%= @user.department.title %></strong></td>
+    <td>Руководитель:</td><td><strong><%= @user.manager.full_name %></strong></td>
+  </tr>
+  <tr>
+    <td>Должность:   </td><td><strong><%= @user.position.title %></strong></td>
+    <td>Уровень:     </td><td><strong><%= @user.level.title %></strong></td>
+  </tr>
+</table>

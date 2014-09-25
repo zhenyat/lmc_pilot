@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Assessment:</strong>
+  <%= @item.assessment %>
+</p>
+
+<p>
+  <strong>Behavior:</strong>
+  <%= @item.behavior %>
+</p>
+
+<p>
+  <strong>User tick:</strong>
+  <%= @item.user_tick %>
+</p>
+
+<p>
+  <strong>Final tick:</strong>
+  <%= @item.final_tick %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

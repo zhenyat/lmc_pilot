@@ -1,9 +1,12 @@
 class Admin::CompetenciesController < ApplicationController
+  layout 'admin'
+
   before_action :set_competency, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/competencies
   # GET /admin/competencies.json
   def index
+    @positions    = Position.order('title')
     @competencies = Competency.all
   end
 
@@ -15,10 +18,14 @@ class Admin::CompetenciesController < ApplicationController
   # GET /admin/competencies/new
   def new
     @competency = Competency.new
+    @positions  = Position.order('title')
+    @clusters   = Cluster.order('title')
   end
 
   # GET /admin/competencies/1/edit
   def edit
+    @positions  = Position.order('title')
+    @clusters   = Cluster.order('title')
   end
 
   # POST /admin/competencies
@@ -59,6 +66,16 @@ class Admin::CompetenciesController < ApplicationController
       format.html { redirect_to admin_competencies_url, notice: 'Competency was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def set_cluster
+    session[:cluster_id] = params[:cluster][:cluster_id]
+    redirect_to :back
+  end
+
+  def set_position
+    session[:position_id] = params[:position][:position_id]
+    redirect_to :back
   end
 
   private

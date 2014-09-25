@@ -1,0 +1,49 @@
+<%= form_for :values, url: {controller: "actioncards", action: "set_values_for_actioncard"}, html: {id: 'set_value_form'} do |f| %>
+  <%= f.label 'Должность: ' %>
+
+  <% if session[:position_id].nil? %>
+    <%= f.collection_select :position_id, Position.all, :id, :title, include_blank: false %>
+  <% else %>
+    <%= f.collection_select :position_id, Position.all, :id, :title, selected: session[:position_id], include_blank: false %>
+  <% end %>
+
+  <%= f.label 'Блок компетенций: ' %>
+
+  <% if session[:cluster_id].nil? %>
+    <%= f.collection_select :cluster_id, Cluster.all, :id, :title, include_blank: false %>
+  <% else %>
+    <%= f.collection_select :cluster_id, Cluster.all, :id, :title, selected: session[:cluster_id], include_blank: false %>
+  <% end %>
+
+  <%= f.submit 'Выбрать'%>
+<% end %>
+<br><br>
+<%= form_for([:admin, @actioncard]) do |f| %>
+  <% if @actioncard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@actioncard.errors.count, "error") %> prohibited this actioncard from being saved:</h2>
+
+      <ul>
+      <% @actioncard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Компетенция: ' %>
+    <%= f.collection_select :competency_id, Competency.where(position_id: session[:position_id], cluster_id: session[:cluster_id]), :id, :title, selected: session[:competency_id], include_blank: false  %>
+  </div>
+  <div class="field">
+    <%= f.label 'Уровень: ' %>
+    <%= f.collection_select :level_id, Level.all, :id, :title, selected: session[:level_id], include_blank: false %>
+    </div>
+  <div class="field">
+      <%= f.label 'Содержание:' %><br>
+    <%= f.text_area :content, size: '70x15' %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Сохранить'%>
+  </div>
+<% end %>

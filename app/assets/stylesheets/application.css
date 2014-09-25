@@ -12,4 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require zt/zt.css
+ *= require zt/zt_table.css
+ *= require coda_slider/coda-slider.css
  */

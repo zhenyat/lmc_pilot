@@ -13,8 +13,9 @@
 #   07.09.2014  ZT created
 ################################################################################
 class Level < ActiveRecord::Base
+  has_many :actioncards
   has_many :behaviors
-  has_many :employees
+  has_many :users
 
   validates :rank,  presence: true, uniqueness: true
   validates :name,  presence: true, uniqueness: true

@@ -16,10 +16,11 @@
 #   07.09.2014  ZT created
 ################################################################################
 class Competency < ActiveRecord::Base
+  has_many   :actioncards
+  has_many   :behaviors
+
   belongs_to :cluster
   belongs_to :position
-
-  has_many   :behaviors
 
   validates :position_id, presence: true
   validates :cluster_id,  presence: true

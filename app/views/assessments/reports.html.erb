@@ -1,0 +1,57 @@
+<%#
+  Template to review Assessment results of Employees by:
+  - admin
+  - hr
+  - manager
+%>
+<% if @user.admin? %>
+  <% departments = Department.where('number != ? AND number != ? AND number != ?', '00', '97', '99') %>
+<% elsif @user.hr? %>
+  <% departments = Department.actual %>
+<% elsif @user.manager? %>
+  <% department_id = @user.department.id %>
+  <% departments = Department.where(id: department_id) %>
+<% else %>                                                  <%# Guest %>
+  <%  departments = Department.where(number: '98') %>
+<% end %>
+
+<h1>Результаты БОРД</h1>
+<table class="ztResult"
+  <thead>
+    <th>Отдел</th><th>ФИО сотрудника</th><th>Состояние процесса</th>
+  </thead>
+  <tbody>
+    <% departments.each do |department| %>
+      <% flag = 1 %>
+      <% span_rows = department.users.where('manager_id != ?', @director_id).count %>
+      <% department.users.order(:last_name).each do |employee| %>
+        <% if employee.assessments.count > 0 %>
+          <% assessment = employee.assessments.last %>
+          <tr>
+            <% if flag == 1 %>
+              <td class='rowspan' rowspan='<%= span_rows %>'><%= department.title %></td>
+              <% flag = 0 %>
+            <% end %>
+            <td class='fio'><%= employee.full_name %></td>
+            <% if employee.assessments.last.closed? %>
+              <td class='status'><%= link_to 'Завершен', assessment_path(assessment) %></td>
+            <% else %>
+              <td class='status'><%= link_to 'Открыт', assessment_path(assessment) %></td></td>
+            <% end %>
+          </tr>
+        <% else %>
+          <% if !employee.manager? %>
+            <tr>
+              <% if flag == 1 %>
+                <td class='rowspan' rowspan='<%= span_rows %>'><%= department.title %></td>
+                <% flag = 0 %>
+              <% end %>
+              <td class='fio'><%= employee.full_name %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

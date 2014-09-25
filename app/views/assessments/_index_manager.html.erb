@@ -1,0 +1,19 @@
+<%#
+  Template to start / continue Manager / Manager's employees Assessment
+  Manager self-assessment if off now
+%>
+
+<p style="color: red;"><%= notice %></p>
+<!--p>Вы должны выбрать:<br>
+  - сотрудника для завершения его процесса БОРД;<br>
+  - или себя для выполнения собственного процесса БОРД
+</p-->
+<p>Выберите сотрудника для завершения его БОРД процесса</p>
+
+<%= form_for :user, url: {controller: "assessments", action: "set_user"}, html: {id: 'set_user_form'} do |f| %>
+  <%= f.label 'Cотрудник ' %>
+  <%= f.collection_select :subordinate_id, @user.subordinates.order(:last_name), :id, :full_name, selected: session[:subordinate_id], include_blank: false %>
+  <%#= f.collection_select :user_id, @user.department.users.order(:last_name), :id, :full_name, selected: session[:user_id], include_blank: false %>
+
+  <%= f.submit 'Выбрать'%>
+<% end %>

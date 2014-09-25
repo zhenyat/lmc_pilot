@@ -1,37 +1,59 @@
-<h1>Listing competencies</h1>
+<h1>Список компетенций</h1>
+<%= form_for :position, url: {controller: "competencies", action: "set_position"}, html: {id: 'set_position_form'} do |f| %>
+  <%= f.label 'Должность ' %>
+  <% if session[:position_id].nil? %>
+    <%= f.collection_select :position_id, Position.all, :id, :title, include_blank: false %>
+  <% else %>
+    <%= f.collection_select :position_id, Position.all, :id, :title, selected: session[:position_id], include_blank: false %>
+  <% end %>
+  <%= f.submit 'Выбрать'%>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Position</th>
-      <th>Cluster</th>
-      <th>Name</th>
-      <th>Title</th>
-      <th>Rank</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @competencies.each do |competency| %>
-      <tr>
-        <td><%= competency.position_id %></td>
-        <td><%= competency.cluster_id %></td>
-        <td><%= competency.name %></td>
-        <td><%= competency.title %></td>
-        <td><%= competency.rank %></td>
-        <td><%= competency.description %></td>
-        <td><%= link_to 'Show', [:admin, competency] %></td>
-        <td><%= link_to 'Edit', edit_admin_competency_path(competency) %></td>
-        <td><%= link_to 'Destroy', [:admin, competency], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% unless session[:position_id].nil? %>
+  <br>
+  <%= form_for :cluster, url: {controller: "competencies", action: "set_cluster"}, html: {id: 'set_cluster_form'} do |f| %>
+    <%= f.label 'Блок компетенций ' %>
+    <% if session[:cluster_id].nil? %>
+      <%= f.collection_select :cluster_id, Cluster.all, :id, :title, include_blank: false %>
+    <% else %>
+      <%= f.collection_select :cluster_id, Cluster.all, :id, :title, selected: session[:cluster_id], include_blank: false %>
     <% end %>
-  </tbody>
-</table>
+    <%= f.submit 'Выбрать'%>
+  <% end %>
+<% end %>
 
+<% unless session[:cluster_id].nil? %>
+  <% competencies = Competency.where(position_id: session[:position_id]).where(cluster_id: session[:cluster_id]) %>
+<br><br>
+  <table class="ztTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Название</th>
+        <th>Ранг</th>
+        <th width="300">Описание</th>
+        <th>Действия</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% competencies.each do |competency| %>
+        <tr>
+          <td><%= competency.name %></td>
+          <td><%= competency.title %></td>
+          <td><%= competency.rank %></td>
+          <td class="descr"><%= competency.description %></td>
+          <td class="buttons">
+            <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, competency] %>&nbsp;
+            <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_competency_path(competency) %>&nbsp;
+            <%= link_to image_tag('buttons/delete.png', alt: 'destroy', title: 'destroy'), [:admin, competency], method: :delete, data: {confirm: 'Вы уверены?'} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <br>
 
-<%= link_to 'New Competency', new_admin_competency_path %>
+<%= link_to 'Добавить', new_admin_competency_path %>

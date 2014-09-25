@@ -1,2 +1,113 @@
-<h1>Pages#review</h1>
-<p>Find me in app/views/pages/review.html.erb</p>
+<h1>Матрица компетенций</h1>
+
+<table class="ztTable">
+  <thead>
+    <th>Блок компетенций</th>
+    <%@positions.each do |position|%>
+      <th><%= position.title %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% @clusters.each do |cluster| %>
+      <% rows = @matrix[cluster.name].count %>
+      <tr>
+        <td class='rowspan' rowspan='<%= rows %>'><%= cluster.title %></td>
+        <% @matrix[cluster.name].each do |row| %>
+
+          <td>
+            <% if row.last.include?('seller') %>
+              <% competency  =  Competency.where(name: row.first, position_id: @positions.where(name: 'seller').first.id).first %>
+              <% title       =  competency.title %>
+              <% description =  competency.description %>
+
+              <%= link_to({controller: 'datashow', action: 'behavior',  competency_id: competency.id, position_name: 'seller'}, {class: "tooltip popup"}) do %>
+                <% if title.blank? %>
+                  <%= "" %>
+                <% else %>
+                  <%= title %>
+                  <span class="critical"><%= description %></span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= "" %>
+            <% end %>
+          </td>
+
+          <td>
+            <% if row.last.include?('senior_seller') %>
+              <% competency  =  Competency.where(name: row.first, position_id: @positions.where(name: 'senior_seller').first.id).first %>
+              <% title       =  competency.title %>
+              <% description =  competency.description %>
+
+              <%= link_to({controller: 'datashow', action: 'behavior',  competency_id: competency.id, position_name: 'senior_seller'}, {class: "tooltip popup"}) do %>
+                <% if title.blank? %>
+                  <%= "" %>
+                <% else %>
+                  <%= title %>
+                  <span class="critical"><%= description %></span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= "" %>
+            <% end %>
+          </td>
+
+          <td>
+            <% if row.last.include?('sector_head') %>
+              <% competency  =  Competency.where(name: row.first, position_id: @positions.where(name: 'sector_head').first.id).first %>
+              <% title       =  competency.title %>
+              <% description =  competency.description %>
+
+              <%= link_to({controller: 'datashow', action: 'behavior',  competency_id: competency.id, position_name: 'sector_head'}, {class: "tooltip popup"}) do %>
+                <% if title.blank? %>
+                  <%= "" %>
+                <% else %>
+                  <%= title %>
+                  <span class="critical"><%= description %></span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= "" %>
+            <% end %>
+          </td>
+
+          <td>
+            <% if row.last.include?('store_director') %>
+              <% competency  =  Competency.where(name: row.first, position_id: @positions.where(name: 'store_director').first.id).first %>
+              <% title       =  competency.title %>
+              <% description =  competency.description %>
+
+              <%= link_to({controller: 'datashow', action: 'behavior',  competency_id: competency.id, position_name: 'store_director'}, {class: "tooltip popup"}) do %>
+                <% if title.blank? %>
+                  <%= "" %>
+                <% else %>
+                  <%= title %>
+                  <span class="critical"><%= description %></span>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= "" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>   <%# Competency Loop %>
+    <% end %>     <%# Cluster Loop %>
+  </tbody>
+</table>
+
+<style>
+  a.popup {
+    text-decoration: none;
+  }
+  a.popup:link    {color: navy;}
+  a.popup:visited {color: navy;}
+  a.popup:active  {color: navy;}
+  a.popup:hover   {background-color: #ffffff;}
+
+</style>
+<script>
+  $('.popup').click(function(event) {
+      event.preventDefault();
+      window.open($(this).attr("href"), "popupWindow", "width=1000, height=800, scrollars=yes");
+  });
+</script>

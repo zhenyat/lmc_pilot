@@ -1,0 +1,41 @@
+<!--h1>Поведенческие индикаторы</h1-->
+<table>
+  <tr>
+    <td>Блок компетенций: </td>
+    <td><strong><%= @cluster.title %></strong></td>
+  </tr>
+  <tr>
+    <td>Компетенция: </td>
+    <td><strong><%= @competency.title %></strong></td>
+  </tr>
+  <tr>
+    <td>Должность: </td>
+    <td><strong><%= @position.title %></strong></td>
+  </tr>
+</table>
+
+<div class="coda-slider"  id="slider-id">
+  <% @levels.each do |level| %>
+    <div>
+      <h2 class="title"><%= level.title %> </h2>
+      <div id="b_items">
+        <h3 class="title">Поведенческие индикаторы</h3>
+        <% if @behaviors[level.name].count > 0 %>
+          <% @behaviors[level.name].each do |behavior| %>
+            <p><%= behavior.content %></p>
+          <% end %>
+        <% else %>
+          <%= "Нет информации" %>
+        <% end %>
+      </div>
+      <div id="a_item">
+        <h3 class="title">Карта развивающих действий</h3>
+        <%  if @actioncard[level.name].nil? %>
+          <%= "Нет информации" %>
+        <% else %>
+          <%= @actioncard[level.name].content.html_safe  %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

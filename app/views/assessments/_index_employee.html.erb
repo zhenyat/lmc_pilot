@@ -1,0 +1,37 @@
+<%#
+  Template to start / continue individual Assessment.
+  New Assessment allowed to be started if only
+  either:
+    - no one exists
+  or
+    - all previous ones are closed
+%>
+
+<%= render 'chunks/user_data' %>
+<div>
+  <% if @assessments.count == 0 %>
+    <p>Нет результатов БОРД</p>
+    <br>
+    <%= link_to 'Начать новую процедуру', new_assessment_path %>
+  <% else %>
+    <br>
+    <table class="ztResult">
+      <caption><strong>Результаты БОРД</strong></caption>
+      <tr><th>Последнее изменение</th><th>Состояние процесса</th></tr>
+      <% @assessments.each do |assessment| %>
+        <tr>
+          <td><%= assessment.updated_at.strftime('%d-%m-%Y') %></td>
+          <% if assessment.closed? %>
+            <td><%= link_to 'Завершен', assessment_path(assessment) %></td>
+          <% else %>
+            <td><%= link_to 'Открыт', assessment_path(assessment) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <%# if @assessments.opened.count == 0 %>
+      <%#= link_to 'Начать новую процедуру', new_assessment_path %>
+    <%# end %>
+
+  <% end %>
+</div>

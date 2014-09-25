@@ -1,0 +1,1 @@
+json.extract! @employee, :store_id, :department_id, :position_id, :level_id, :manager_id, :surname, :name, :middle_name, :pin, :active, :created_at, :updated_at

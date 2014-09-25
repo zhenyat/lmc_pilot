@@ -14,7 +14,8 @@
 #   07.09.2014  ZT created
 ################################################################################
 class Behavior < ActiveRecord::Base
-  has_many   :assessments
+#  has_many   :assessments
+  has_many   :items
 
   belongs_to :competency
   belongs_to :level
@@ -22,5 +23,11 @@ class Behavior < ActiveRecord::Base
   validates :competency_id, presence: true
   validates :level_id,      presence: true
   validates :content,       presence: true
-  validates :active,        presence: true
+  validates :active,       inclusion: {in: [true, false]}
+
+  scope :active, -> {where active: true}
+
+  def active?
+    self.active
+  end
 end

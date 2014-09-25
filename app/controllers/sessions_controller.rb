@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
+  layout 'session'
+
   def create
     user = User.find_by_login(params[:session][:login])
     if user && user.authenticate(params[:session][:password])
-      #sign_in user
+      log_in user
       redirect_to controller: 'pages', action: 'home'
     else
       # Create an error message and re-render the signin form
@@ -11,9 +13,17 @@ class SessionsController < ApplicationController
     end
   end
 
-  def new
+  def destroy
+    session.delete(:user_id)
+    @current_user = nil
+    session[:current_user] = nil
+    session[:manager_id]   = nil
+    session[:position_id] = nil
+    session[:level_id] = nil
+    redirect_to new_session_path
   end
 
-  def destroy
+
+  def new
   end
 end

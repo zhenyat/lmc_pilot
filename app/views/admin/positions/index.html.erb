@@ -1,13 +1,12 @@
-<h1>Listing positions</h1>
+<h1>Список долджностей</h1>
 
-<table>
+<table class="ztTable">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Title</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Название</th>
+      <th>Действия</th>
+
     </tr>
   </thead>
 
@@ -16,9 +15,11 @@
       <tr>
         <td><%= position.name %></td>
         <td><%= position.title %></td>
-        <td><%= link_to 'Show', [:admin, position] %></td>
-        <td><%= link_to 'Edit', edit_admin_position_path(position) %></td>
-        <td><%= link_to 'Destroy', [:admin, position], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="buttons">
+          <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, position] %>&nbsp;
+          <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_position_path(position) %>&nbsp;
+          <%= link_to image_tag('buttons/delete.png', alt: 'destroy', title: 'destroy'), [:admin, position], method: :delete, data: {confirm: 'Вы уверены?'} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Position', new_admin_position_path %>
+<%= link_to 'Добавить', new_admin_position_path %>

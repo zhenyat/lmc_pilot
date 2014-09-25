@@ -1,12 +1,14 @@
 class CreateBehaviors < ActiveRecord::Migration
   def change
     create_table :behaviors do |t|
-      t.integer :competency_id, null: false
-      t.integer :level_id,      null: false
-      t.text    :content,       null: false
-      t.boolean :active,        null: false, default: true
-      
+      t.references :competency, null: false, index: true
+      t.references :level,      null: false, index: true
+      t.text       :content,    null: false
+      t.boolean    :active,     null: false, default: true
+
       t.timestamps
     end
+    add_foreign_key :behaviors, :competencies
+    add_foreign_key :behaviors, :levels
   end
 end

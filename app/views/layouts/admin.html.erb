@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LMC Admin Panel</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <%= render 'layouts/header_admin' %>
+
+    <nav id="top">
+      <ul>
+        <!--li><%= link_to 'Администрирование',        '/admin/panel' %></li-->
+        <li><%= link_to 'Сотрудники',               '/admin/users' %></li>
+        <li><%= link_to 'Должности',                '/admin/positions' %></li>
+        <li><%= link_to 'Уровни компетенции',       '/admin/levels' %></li>
+        <li><%= link_to 'Блоки компетенций',        '/admin/clusters' %></li>
+        <li><%= link_to 'Компетенции',              '/admin/competencies' %></li>
+        <li><%= link_to 'Поведенческие индикаторы', '/admin/behaviors' %></li>
+        <li><%= link_to 'Развитие',                 '/admin/actioncards' %></li>
+      </ul>
+    </nav>
+
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

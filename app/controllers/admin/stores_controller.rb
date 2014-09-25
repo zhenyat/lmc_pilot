@@ -1,4 +1,5 @@
 class Admin::StoresController < ApplicationController
+  layout 'admin'
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/stores

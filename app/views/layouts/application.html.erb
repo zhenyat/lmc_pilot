@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>LmcPilot</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>LMC Pilot Project</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
 
-<%= yield %>
+    <!--script>
+      <%# To fix HTML5 issues for IE 8 %>
+      for(var el="header footer nav section article aside time video".split(' ');el.length;){
+         document.createElement(el.pop())
+      }
+    </script-->
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
 
-</body>
+    <nav id="top">
+      <ul>
+        <li><%= link_to 'Обзор модели',      '/pages/review' %></li>
+        <li><%= link_to 'БОРД',              '/assessments' %></li>
+        <li><%= link_to 'Отчетность',        '/reports' %></li>
+        <li><%= link_to 'Администрирование', '/admin/panel' %></li>
+      </ul>
+    </nav>
+
+    <%= yield %>
+
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

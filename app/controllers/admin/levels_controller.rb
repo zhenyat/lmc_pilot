@@ -1,4 +1,5 @@
 class Admin::LevelsController < ApplicationController
+  layout 'admin'
   before_action :set_level, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/levels

@@ -1,0 +1,55 @@
+<h1>Процесс БОРД: продолжить / редактировать</h1>
+<%= render 'chunks/user_data' %>
+
+<%#= form_for :assessment, url: {controller: "assessments", action: "handle_edit"}, html: {id: 'assessment_form'} do |f| %>
+<%= form_for @assessment do |f| %>
+
+  <% if @assessment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment.errors.count, "error") %> prohibited this assessment from being saved:</h2>
+
+      <ul>
+      <% @assessment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% Cluster.all.each do |cluster| %>
+
+    <% competencies = Competency.where(position_id: @user.position.id, cluster_id: cluster.id)%>
+    <% if competencies.count > 0 %>
+      <h2>Блок компетенций: <%= cluster.title %> (Уровень: <%= @user.level.title %>)</h2>
+
+      <% competencies.each do |competency| %>
+        <h3>Компетенция: <%= competency.title %></h3>
+
+        <% behaviors = Behavior.where(competency_id: competency.id, level_id: @user.level.id) %>
+        <% behavior_ids = [] %>
+
+        <% if behaviors.count > 0 %>
+          <% behaviors.each do |behavior| %>
+            <% behavior_ids << behavior.id %>
+          <% end %>
+          <% @assessment_items.where('behavior_id IN (?)', behavior_ids).each do |item| %>
+            <table class="ztTable">
+              <%= f.fields_for item do |ff| %>
+                <tr>
+                  <td class="descr"><%= ff.label item.behavior.content %></td>
+                  <td><%= item.user_tick %></td>
+                  <td class="cb"><%= check_box_tag "item.user_tick[#{item.behavior.id}]", value: item.user_tick %></td>
+                  <!--td class="cb"><%#= ff.check_box "item.user_tick[#{item.behavior.id}]", value: item.user_tick %></td-->
+                </tr>
+              <% end %>     <%# fields_for Loop%>
+            </table>
+          <% end %>         <%# assessment_items Loop %>
+        <% end %>           <%# IF behaviors.count END %>
+      <% end %>             <%# competencies Loop %>
+     <% end %>              <%# IF competencies.count END %>
+  <% end %>                 <%# Cluster Loop %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>                   <%# Form Loop%>

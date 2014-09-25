@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Просмотр Карты развивающих действий</h1>
+
+<p>
+  <strong>Блок компетенций: </strong>
+  <%= @actioncard.competency.cluster.title %>
+</p>
+
+<p>
+  <strong>Компетенция: </strong>
+  <%= @actioncard.competency.title %>
+</p>
+
+<p>
+  <strong>Должность: </strong>
+  <%= @actioncard.competency.position.title %>
+</p>
+
+<p>
+  <strong>Уровень: </strong>
+  <%= @actioncard.level.title %>
+</p>
+
+<p>
+  <strong>Содержание:</strong><br>
+  <%= @actioncard.content %>
+</p>
+
+<%= link_to 'Редактировать', edit_admin_actioncard_path(@actioncard) %> |
+<%= link_to 'Назад',         admin_actioncards_path %>

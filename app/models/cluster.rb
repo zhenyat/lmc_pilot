@@ -12,12 +12,16 @@
 #     description - Cluster description (for hint)
 #
 #   07.09.2014  ZT created
+#   15.09.2014  Updated (scopes added )
 ################################################################################
 class Cluster < ActiveRecord::Base
   has_many :competencies
 
   validates :name,  presence: true, uniqueness: true
-  validates :title, presence: true
+  validates :title, inclusion: {in: [true, false]}
+
+  scope :mutual, -> {where mutual: true}
+  scope :single, -> {where mutual: false}
 
   def mutual?
     self.mutual

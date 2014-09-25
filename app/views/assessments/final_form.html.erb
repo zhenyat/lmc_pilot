@@ -1,0 +1,72 @@
+<h1>Процесс БОРД: завершение</h1>
+<%= render 'chunks/user_data' %>
+
+<%= form_for :assessment, url: {controller: "assessments", action: "handle_final"}, html: {id: 'assessment_form'}   do |f| %>
+
+  <%= f.hidden_field :user_id,  value: @user.id %>
+  <%= f.hidden_field :assessment_id, value: @assessment.id %>
+
+  <% Cluster.all.each do |cluster| %>
+
+    <% if cluster.name == 'functional' %>    <%# Multi-level assessment %>
+
+      <% competencies = Competency.where(position_id: @user.position.id, cluster_id: cluster.id)%>
+      <% if competencies.count > 0 %>
+        <h2>Блок компетенций: <%= cluster.title %> </h2>
+        <% competencies.each do |competency| %>
+          <h3>Компетенция: <%= competency.title %></h3>
+          <% for level_id in session[:levels] %>
+            <% behaviors = Behavior.where(competency_id: competency.id, level_id: level_id) %>
+            <% if behaviors.count > 0 %>
+              <h4>Уровень: <%= Level.find(level_id).title %></h4>
+              <table class="ztTable">
+                <%= f.fields_for :items do |ff| %>
+                  <% behaviors.each do |behavior| %>
+                    <tr>
+                      <td class="descr"><%= ff.label behavior.content %></td>
+                      <td class="cb"><%= Item.where(assessment_id: @assessment.id).find_by(behavior_id: behavior.id).user_tick == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                      <td class="cb"><%= ff.check_box "final_tick[#{behavior.id}]" %></td>
+                    </tr>
+                    <%#= ff.hidden_field "final_tick[#{behavior.id}]", value: 0 %>
+                  <% end %>   <%# behaviors Loop %>
+                <% end %>     <%# fields_for Loop%>
+              </table>
+            <% end %>         <%# IF behaviors.count END %>
+          <% end %>         <%# level Loop%>
+        <% end %>           <%# competencies Loop %>
+      <% end %>             <%# IF competencies.count END %>
+
+    <% else %>                                <%# Single-level assessment %>
+
+      <% competencies = Competency.where(position_id: @user.position.id, cluster_id: cluster.id)%>
+      <% if competencies.count > 0 %>
+        <h2>Блок компетенций: <%= cluster.title %> </h2>
+        <% competencies.each do |competency| %>
+          <h3>Компетенция: <%= competency.title %></h3>
+          <% behaviors = Behavior.where(competency_id: competency.id, level_id: @user.level.id) %>
+          <%# behaviors = Behavior.where(competency_id: competency.id).where('level_id IN (?)', session[:levels]) %>
+          <% if behaviors.count > 0 %>
+            <table class="ztTable">
+              <%= f.fields_for :items do |ff| %>
+                <% behaviors.each do |behavior| %>
+                  <tr>
+                    <td class="descr"><%= ff.label behavior.content %></td>
+                    <td class="cb"><%= Item.where(assessment_id: @assessment.id).find_by(behavior_id: behavior.id).user_tick == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                    <td class="cb"><%= ff.check_box "final_tick[#{behavior.id}]" %></td>
+                  </tr>
+                  <%#= ff.hidden_field "final_tick[#{behavior.id}]", value: 0 %>
+                <% end %>   <%# behaviors Loop %>
+              <% end %>     <%# fields_for Loop%>
+            </table>
+          <% end %>         <%# IF behaviors.count END %>
+        <% end %>           <%# competencies Loop %>
+      <% end %>             <%# IF competencies.count END %>
+
+    <%  end %>              <%# IF cluster functional END %>
+  <% end %>                 <%# Cluster Loop %>
+
+  <br>
+  <div class="actions">
+    <%= f.submit 'Сохранить результат' %>
+  </div>
+<% end %>                 <%# Form Loop%>

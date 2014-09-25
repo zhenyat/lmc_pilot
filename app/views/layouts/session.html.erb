@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LMC Login</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <header>
+    <%= favicon_link_tag  'ror.ico' %>
+    <%= link_to image_tag('leroy_merlin.png', alt: 'Leroy Merlin', title: 'На главную'), url_for(controller: :sessions, action: :new) %>
+    <h1>Модель компетенций</h1>
+    <h2>Пилотный проект</h2>
+  </header>
+  <body>
+    <br>
+    <%= yield %>
+  </body>
+</html>
+

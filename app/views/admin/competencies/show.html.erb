@@ -1,13 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Просмотр компетенции</h1>
 <p>
-  <strong>Position:</strong>
-  <%= @competency.position_id %>
+  <strong>Должность:</strong>
+  <%= @competency.position.title %>
 </p>
 
 <p>
-  <strong>Cluster:</strong>
-  <%= @competency.cluster_id %>
+  <strong>Кластер:</strong>
+  <%= @competency.cluster.title %>
 </p>
 
 <p>
@@ -16,19 +17,19 @@
 </p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Название:</strong>
   <%= @competency.title %>
 </p>
 
 <p>
-  <strong>Rank:</strong>
+  <strong>Ранг:</strong>
   <%= @competency.rank %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Описание:</strong>
   <%= @competency.description %>
 </p>
 
-<%= link_to 'Edit', edit_admin_competency_path(@competency) %> |
-<%= link_to 'Back', admin_competencies_path %>
+<%= link_to 'Редактировать', edit_admin_competency_path(@competency) %> |
+<%= link_to 'Назад', admin_competencies_path %>

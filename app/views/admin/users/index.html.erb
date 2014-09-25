@@ -1,28 +1,34 @@
-<h1>Listing users</h1>
+<h1>Список зарегистрированных пользователей</h1>
 
-<table>
+<table class="ztTable">
   <thead>
     <tr>
-      <th>Role</th>
+      <th>ФИО</th>
+      <th>Отдел</th>
+      <th>Должность</th>
+      <th>Уровень</th>
       <th>Login</th>
-      <th>Password digest</th>
-      <th>Remember token</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Менеджер</th>
+      <th>Активный</th>
+      <th>Действия</th>
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.role_id %></td>
+        <td><%= user.full_name %></td>
+        <td><%= user.department.title %></td>
+        <td><%= user.position.title %></td>
+        <td><%= user.level.title %></td>
         <td><%= user.login %></td>
-        <td><%= user.password_digest %></td>
-        <td><%= user.remember_token %></td>
-        <td><%= link_to 'Show', [:admin, user] %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Destroy', [:admin, user], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.manager.nil? ? 'Не определен' : user.manager.full_name %></td>
+        <td><%= user.active? ? 'Да' : 'Нет' %></td>
+        <td class="buttons">
+          <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, user] %>&nbsp;
+          <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_user_path(user) %>&nbsp;
+          <%= link_to image_tag('buttons/delete.png', alt: 'destroy', title: 'destroy'), [:admin, user], method: :delete, data: {confirm: 'Вы уверены?'} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New User', new_admin_user_path %>
+<%= link_to 'Добавить пользователя', new_admin_user_path %>

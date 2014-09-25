@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :items
+  resources :assessments
   resources :sessions, only: [:new, :create, :destroy]
 
   get 'datashow/behavior'
@@ -8,7 +10,10 @@ Rails.application.routes.draw do
   get 'pages/home'
   get 'pages/review'
 
+  delete 'signout', to: 'sessions#destroy', as: :signout
+
   namespace :admin do
+    resources :actioncards
     resources :behaviors
     resources :clusters
     resources :competencies
@@ -21,7 +26,22 @@ Rails.application.routes.draw do
     resources :roles
     resources :stores
     resources :users
+
+    post 'set_values_for_actioncard', to: 'actioncards',  as: 'set_values_for_actioncard'
+    post 'set_values',                to: 'behaviors',    as: 'set_values'
+    post 'set_cluster',               to: 'competencies', as: 'set_cluster'
+    post 'set_position',              to: 'competencies', as: 'set_position'
   end
+
+  get  'final_form',   to: 'assessments', as: 'final_form'
+  get  'reports',      to: 'assessments', as: 'reports'
+  get  'report_user',  to: 'assessments', as: 'report_user'
+  post 'set_user',     to: 'assessments', as: 'set_user'
+  post 'handle_edit',  to: 'assessments', as: 'assessments/handle_edit'
+  post 'handle_final', to: 'assessments', as: 'handle_final'
+  post 'handle_new',   to: 'assessments', as: 'handle_new'
+  post 'review',       to: 'pages',       as: 'review'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

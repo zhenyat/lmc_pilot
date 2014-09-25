@@ -1,15 +1,14 @@
-<h1>Listing clusters</h1>
+<h1>Список блоков компетенций</h1>
 
-<table>
+<table class="ztTable">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Title</th>
+      <th>Название</th>
       <th>Mutual</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Описание</th>
+      <th>Действия</th>
+
     </tr>
   </thead>
 
@@ -20,9 +19,11 @@
         <td><%= cluster.title %></td>
         <td><%= cluster.mutual %></td>
         <td><%= cluster.description %></td>
-        <td><%= link_to 'Show', [:admin, cluster] %></td>
-        <td><%= link_to 'Edit', edit_admin_cluster_path(cluster) %></td>
-        <td><%= link_to 'Destroy', [:admin, cluster], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="buttons">
+          <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, cluster] %>&nbsp;
+          <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_cluster_path(cluster) %>&nbsp;
+          <%= link_to image_tag('buttons/delete.png', alt: 'destroy', title: 'destroy'), [:admin, cluster], method: :delete, data: {confirm: 'Вы уверены?'} %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Cluster', new_admin_cluster_path %>
+<%= link_to 'Добавить', new_admin_cluster_path %>

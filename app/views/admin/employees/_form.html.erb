@@ -1,0 +1,57 @@
+<%= form_for([:admin, @employee]) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+      <%= f.label :store_id %><br>
+    <%= f.number_field :store_id %>
+    </div>
+  <div class="field">
+      <%= f.label :department_id %><br>
+    <%= f.number_field :department_id %>
+    </div>
+  <div class="field">
+      <%= f.label :position_id %><br>
+    <%= f.number_field :position_id %>
+    </div>
+  <div class="field">
+      <%= f.label :level_id %><br>
+    <%= f.number_field :level_id %>
+    </div>
+  <div class="field">
+      <%= f.label :manager_id %><br>
+    <%= f.number_field :manager_id %>
+    </div>
+  <div class="field">
+      <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+    </div>
+  <div class="field">
+      <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    </div>
+  <div class="field">
+      <%= f.label :middle_name %><br>
+    <%= f.text_field :middle_name %>
+    </div>
+  <div class="field">
+      <%= f.label :pin %><br>
+    <%= f.text_field :pin %>
+    </div>
+  <div class="field">
+      <%= f.label :active %><br>
+    <%= f.check_box :active %>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

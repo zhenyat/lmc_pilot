@@ -12,30 +12,30 @@
   <% end %>
 
   <div class="field">
-      <%= f.label :position_id %><br>
-    <%= f.number_field :position_id %>
-    </div>
+    <%= f.label 'Должность' %><br>
+    <%= f.collection_select :position_id, Position.all, :id, :title, selected: session[:position_id], include_blank: false %>
+  </div>
   <div class="field">
-      <%= f.label :cluster_id %><br>
-    <%= f.number_field :cluster_id %>
-    </div>
+    <%= f.label 'Блок компетенций' %><br>
+    <%= f.collection_select :cluster_id, Cluster.all, :id, :title, selected: session[:cluster_id], include_blank: false %>
+  </div>
   <div class="field">
-      <%= f.label :name %><br>
+    <%= f.label 'name' %><br>
     <%= f.text_field :name %>
-    </div>
+  </div>
   <div class="field">
-      <%= f.label :title %><br>
+    <%= f.label 'Название' %><br>
     <%= f.text_field :title %>
-    </div>
+  </div>
   <div class="field">
-      <%= f.label :rank %><br>
+    <%= f.label 'Ранг (от 1 до 5)' %><br>
     <%= f.number_field :rank %>
-    </div>
+  </div>
   <div class="field">
-      <%= f.label :description %><br>
-    <%= f.text_field :description %>
-    </div>
+    <%= f.label 'Описание' %><br>
+    <%= f.text_area :description, size: "50x5" %>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Сохранить'%>
   </div>
 <% end %>

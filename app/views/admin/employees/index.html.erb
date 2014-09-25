@@ -1,0 +1,45 @@
+<h1>Listing employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Store</th>
+      <th>Department</th>
+      <th>Position</th>
+      <th>Level</th>
+      <th>Manager</th>
+      <th>Surname</th>
+      <th>Name</th>
+      <th>Middle name</th>
+      <th>Pin</th>
+      <th>Active</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.store_id %></td>
+        <td><%= employee.department_id %></td>
+        <td><%= employee.position_id %></td>
+        <td><%= employee.level_id %></td>
+        <td><%= employee.manager_id %></td>
+        <td><%= employee.surname %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.middle_name %></td>
+        <td><%= employee.pin %></td>
+        <td><%= employee.active %></td>
+        <td><%= link_to 'Show', [:admin, employee] %></td>
+        <td><%= link_to 'Edit', edit_admin_employee_path(employee) %></td>
+        <td><%= link_to 'Destroy', [:admin, employee], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employee', new_admin_employee_path %>

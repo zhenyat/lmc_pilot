@@ -5,15 +5,14 @@
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
 
-      <%= f.label :login %>
+      <%= f.label 'Логин' %>
       <%= f.text_field :login %>
     <br>
-      <%= f.label :password %>
+      <%= f.label 'Пароль' %>
       <%= f.password_field :password %>
     <br>
       <%= f.submit "Вход", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>
 </div>
-<br>
-<p>Для получения доступа в систему обратитесь к ...</p>
+

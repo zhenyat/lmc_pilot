@@ -1,0 +1,11 @@
+<header>
+  <% if logged_in? %>
+    <div align="right">
+      <%= link_to "Log out", signout_path, method: "delete" %>
+    </div>
+  <% end %>
+  <%= favicon_link_tag  'ror.ico' %>
+  <%= link_to image_tag('leroy_merlin.png', alt: 'Leroy Merlin', title: 'На главную'), url_for(controller: :pages, action: :home) %>
+  <h1>Модель компетенций</h1>
+  <h2>Пилотный проект БОРД</h2>
+</header>

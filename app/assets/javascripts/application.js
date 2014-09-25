@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require coda_slider/jquery.coda-slider-3.0
+//= require coda_slider/jquery.easing.1.3
