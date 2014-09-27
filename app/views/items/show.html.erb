@@ -1,24 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Assessment:</strong>
-  <%= @item.assessment %>
-</p>
+<table class="ztTable">
+    <tr>
+      <td class="descr"><%= @item.behavior.content %></td>
+      <td class="cb"><%= @item.user_tick == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+    </tr>
+  </table>
 
-<p>
-  <strong>Behavior:</strong>
-  <%= @item.behavior %>
-</p>
-
-<p>
-  <strong>User tick:</strong>
-  <%= @item.user_tick %>
-</p>
-
-<p>
-  <strong>Final tick:</strong>
-  <%= @item.final_tick %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<br>
+<%#= link_to 'Edit', edit_item_path(@item) %>
+<%= link_to 'Назад', items_path(assessment_id: @assessment.id) %>

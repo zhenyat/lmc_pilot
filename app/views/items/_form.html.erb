@@ -11,23 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :assessment_id %><br>
-    <%= f.text_field :assessment_id %>
-  </div>
-  <div class="field">
-    <%= f.label :behavior_id %><br>
-    <%= f.text_field :behavior_id %>
-  </div>
-  <div class="field">
-    <%= f.label :user_tick %><br>
-    <%= f.check_box :user_tick %>
-  </div>
-  <div class="field">
-    <%= f.label :final_tick %><br>
-    <%= f.check_box :final_tick %>
-  </div>
+  <%= f.hidden_field :assessment_id, value: @assessment.id %>
+  <%= f.hidden_field :behavior_id,   value: @item.behavior_id %>
+
+  <table class="ztTable">
+    <tr>
+      <td class="descr"><%= @item.behavior.content %></td>
+      <td class="cb"><%= f.check_box :user_tick %></td>
+    </tr>
+  </table>
+  <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Сохранить изменение'%>
   </div>
 <% end %>

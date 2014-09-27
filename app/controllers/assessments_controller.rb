@@ -22,6 +22,7 @@ class AssessmentsController < ApplicationController
   def edit
     @user  = User.find session[:user_id]
     @assessment_items = Item.where assessment_id: @assessment.id
+    @items = Item.all
   end
 
   # Finalized the assessment by Manager

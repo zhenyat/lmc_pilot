@@ -103,3 +103,23 @@ footer {
 .zt_th {
     width: 300px;
 }
+
+.zt_button {
+    margin:         10px auto;
+    font-family:    Verdana, Arial;
+    font-size:      16px;
+    color:          white;
+    padding:        5px 15px 5px 15px;
+    border-radius:  5px;
+    text-shadow:    1px 1px 3px #666666;
+    border:         solid #235d3e 2px;
+    background:     -webkit-gradient(linear, 0 0, 0 100%, from(#659865), to(#235d3e));
+    background:     -moz-linear-gradient(top, #659865, #235d3e);
+    -ms-filter:     progid:DXImageTransform.Microsoft.gradient(startColorStr=#659865, endColorStr=#235d3e);
+    filter:         progid:DXImageTransform.Microsoft.gradient(startColorStr=#659865, endColorStr=#235d3e);
+    display:        inline-block; /* IE is so silly */
+}
+
+.zt_button a {color: white; text-decoration: none}
+
+a:hover {background-color: transparent; color: black; text-decoration: none}

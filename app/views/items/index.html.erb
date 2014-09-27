@@ -1,31 +1,40 @@
-<h1>Listing items</h1>
+<h1>Процесс БОРД: просмотр и редактирование</h1>
+<%= render 'chunks/user_data' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Assessment</th>
-      <th>Behavior</th>
-      <th>User tick</th>
-      <th>Final tick</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.assessment %></td>
-        <td><%= item.behavior %></td>
-        <td><%= item.user_tick %></td>
-        <td><%= item.final_tick %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<% Cluster.all.each do |cluster| %>
+  <% competencies = cluster.competencies.where(position_id: @user.position.id) %>
+  <%  if competencies.count > 0 %>
+    <h2>Блок компетенций: <%= cluster.title %> </h2>
+    <% competencies.each do |competency| %>
+      <h3>Компетенция: <%= competency.title %> </h3>
+      <% if cluster.mutual? %>
+        <table class='ztTable'>
+          <%@items.each do |item| %>
+            <% if item.behavior.competency.id == competency.id %>
+              <tr>
+                <td class='descr'><%= item.behavior.content %></td>
+                <td class="cb"><%= item.user_tick == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                <td class='edit'><%= link_to image_tag('buttons/edit.png', alt: 'edit', title: 'edit'), edit_item_path(item) %>&nbsp;
+              </tr>
+            <% end %>
+          <% end %>         <%# IF item belongs to competency END %>
+        </table>
+      <% else %>
+        <% @level_ids.each do |level_id| %>
+          <h4>Уровень: <%= Level.find(level_id).title %> </h4>
+          <table class='ztTable'>
+            <%@items.each do |item| %>
+              <% if item.behavior.competency.id == competency.id && item.behavior.level.id == level_id %>
+                <tr>
+                  <td class='descr'><%= item.behavior.content %></td>
+                  <td class="cb"><%= item.user_tick == true ? image_tag("checkmark.png", :size => "21x23") : '' %></td>
+                  <td class='edit'><%= link_to image_tag('buttons/edit.png', alt: 'edit', title: 'edit'), edit_item_path(item) %>&nbsp;
+                </tr>
+              <% end %>     <%# IF item belongs to competency && level END %>
+            <% end %>
+          </table>
+        <% end %>           <%# Item Loop %>
+      <% end %>
+    <% end %>               <%# Competency Loop %>
+  <% end %>                 <%# IF competencies.count > 0 Loop %>
+<% end %>                   <%# Cluster Loop %>

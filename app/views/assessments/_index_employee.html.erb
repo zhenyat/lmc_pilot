@@ -24,7 +24,9 @@
           <% if assessment.closed? %>
             <td><%= link_to 'Завершен', assessment_path(assessment) %></td>
           <% else %>
-            <td><%= link_to 'Открыт', assessment_path(assessment) %></td>
+            <td><%= link_to 'Открыт', items_path(assessment_id:assessment) %></td>
+            <!--td><%#= link_to 'Открыт', edit_assessment_path(assessment) %></td-->
+            <td style="width: 20px;"><%= link_to 'Отчет', assessment_path(assessment) %></td>
           <% end %>
         </tr>
       <% end %>

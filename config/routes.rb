@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post 'handle_edit',  to: 'assessments', as: 'assessments/handle_edit'
   post 'handle_final', to: 'assessments', as: 'handle_final'
   post 'handle_new',   to: 'assessments', as: 'handle_new'
+  post 'handle_update', to: 'items', as: 'handle_update'
   post 'review',       to: 'pages',       as: 'review'
 
 

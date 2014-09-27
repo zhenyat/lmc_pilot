@@ -343,10 +343,18 @@ class PopulateUsers < ActiveRecord::Migration
                 login: '11112', last_name: 'Петров', first_name: 'Петр', middle_name: 'Петрович',
                 active: true, password: 'Passwd1', password_confirmation: 'Passwd1'
 
+    User.create store_id: store.id, department_id: department.id, position_id: position.id, level_id: level.id, manager_id: manager.id,
+                login: '11114', last_name: 'Сидоров', first_name: 'Сидр', middle_name: 'Сидорович',
+                active: true, password: 'Passwd1', password_confirmation: 'Passwd1'
+
     level      = Level.find_by      name: 'specialist'
 
     User.create store_id: store.id, department_id: department.id, position_id: position.id, level_id: level.id, manager_id: manager.id,
                 login: '11113', last_name: 'Зотова', first_name: 'Зоя', middle_name: 'Зиновьевна',
+                active: true, password: 'Passwd1', password_confirmation: 'Passwd1'
+
+    User.create store_id: store.id, department_id: department.id, position_id: position.id, level_id: level.id, manager_id: manager.id,
+                login: '11115', last_name: 'Федоров', first_name: 'Федор', middle_name: 'Федорович',
                 active: true, password: 'Passwd1', password_confirmation: 'Passwd1'
 
     ###########   Администраторы системы   ###########

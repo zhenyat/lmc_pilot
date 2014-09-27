@@ -57,9 +57,18 @@
     line-height:    20px;
     white-space:    normal;
 }
+.ztTable td.narrow {
+    width:          20px;
+}
 .ztTable td.buttons {
 
     width:          70px;
+    text-align:     center;
+    line-height:    10px;
+}
+.ztTable td.edit {
+
+    width:          20px;
     text-align:     center;
     line-height:    10px;
 }

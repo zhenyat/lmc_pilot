@@ -108,4 +108,10 @@
     <% end %>
   <% end %>
 <% end %>
-
+    <div class="zt_button"><%= link_to "Печать", '#', onclick: "printpage()"%></div>
+<script>
+  function printpage()
+    {
+    window.print()
+    }
+</script>

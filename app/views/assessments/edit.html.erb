@@ -1,7 +1,7 @@
 <h1>Процесс БОРД: продолжить / редактировать</h1>
 <%= render 'chunks/user_data' %>
-
-<%#= form_for :assessment, url: {controller: "assessments", action: "handle_edit"}, html: {id: 'assessment_form'} do |f| %>
+<%= @assessment.id %>
+<%#= form_for @assessment, url: {controller: "assessments", action: "handle_edit"}, html: {id: 'assessment_form'} do |f| %>
 <%= form_for @assessment do |f| %>
 
   <% if @assessment.errors.any? %>
@@ -16,38 +16,26 @@
     </div>
   <% end %>
 
-  <% Cluster.all.each do |cluster| %>
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
 
-    <% competencies = Competency.where(position_id: @user.position.id, cluster_id: cluster.id)%>
-    <% if competencies.count > 0 %>
-      <h2>Блок компетенций: <%= cluster.title %> (Уровень: <%= @user.level.title %>)</h2>
+  <div class="field">
+    <%= f.label :closed %>
+    <%= f.check_box :closed %>
+  </div>
 
-      <% competencies.each do |competency| %>
-        <h3>Компетенция: <%= competency.title %></h3>
+  <%= f.fields_for @items do |ff| %>
 
-        <% behaviors = Behavior.where(competency_id: competency.id, level_id: @user.level.id) %>
-        <% behavior_ids = [] %>
 
-        <% if behaviors.count > 0 %>
-          <% behaviors.each do |behavior| %>
-            <% behavior_ids << behavior.id %>
-          <% end %>
-          <% @assessment_items.where('behavior_id IN (?)', behavior_ids).each do |item| %>
-            <table class="ztTable">
-              <%= f.fields_for item do |ff| %>
-                <tr>
-                  <td class="descr"><%= ff.label item.behavior.content %></td>
-                  <td><%= item.user_tick %></td>
-                  <td class="cb"><%= check_box_tag "item.user_tick[#{item.behavior.id}]", value: item.user_tick %></td>
-                  <!--td class="cb"><%#= ff.check_box "item.user_tick[#{item.behavior.id}]", value: item.user_tick %></td-->
-                </tr>
-              <% end %>     <%# fields_for Loop%>
-            </table>
-          <% end %>         <%# assessment_items Loop %>
-        <% end %>           <%# IF behaviors.count END %>
-      <% end %>             <%# competencies Loop %>
-     <% end %>              <%# IF competencies.count END %>
-  <% end %>                 <%# Cluster Loop %>
+    <% @assessment_items.each do |item| %>
+      <%= item.behavior.content %>
+      <strong><%= item.user_tick %></strong>
+      <%= ff.check_box item.user_tick %>
+      <br>
+    <% end %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>

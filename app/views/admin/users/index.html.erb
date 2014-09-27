@@ -9,7 +9,7 @@
       <th>Уровень</th>
       <th>Login</th>
       <th>Менеджер</th>
-      <th>Активный</th>
+      <th width='20'>Активный</th>
       <th>Действия</th>
     </tr>
   </thead>
@@ -20,10 +20,10 @@
         <td><%= user.full_name %></td>
         <td><%= user.department.title %></td>
         <td><%= user.position.title %></td>
-        <td><%= user.level.title %></td>
-        <td><%= user.login %></td>
+        <td class="buttons"><%= user.level.title %></td>
+        <td class="buttons"><%= user.login %></td>
         <td><%= user.manager.nil? ? 'Не определен' : user.manager.full_name %></td>
-        <td><%= user.active? ? 'Да' : 'Нет' %></td>
+        <td class='narrow'><%= user.active? ? 'Да' : 'Нет' %></td>
         <td class="buttons">
           <%= link_to image_tag('buttons/show.png',   alt: 'show',    title: 'show'),    [:admin, user] %>&nbsp;
           <%= link_to image_tag('buttons/edit.png',   alt: 'edit',    title: 'edit'),    edit_admin_user_path(user) %>&nbsp;
