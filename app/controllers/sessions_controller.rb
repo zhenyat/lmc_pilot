@@ -15,11 +15,12 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    @current_user = nil
-    session[:current_user] = nil
-    session[:manager_id]   = nil
-    session[:position_id] = nil
-    session[:level_id] = nil
+    @current_user           = nil
+    session[:current_user]  = nil
+    session[:manager_id]    = nil
+    session[:position_id]   = nil
+    session[:level_id]      = nil
+
     redirect_to new_session_path
   end
 

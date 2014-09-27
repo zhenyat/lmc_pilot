@@ -17,7 +17,7 @@
     <br>
     <table class="ztResult">
       <caption><strong>Результаты БОРД</strong></caption>
-      <tr><th>Последнее изменение</th><th>Состояние процесса</th></tr>
+      <tr><th>Дата</th><th>Состояние процесса</th></tr>
       <% @assessments.each do |assessment| %>
         <tr>
           <td><%= assessment.updated_at.strftime('%d-%m-%Y') %></td>

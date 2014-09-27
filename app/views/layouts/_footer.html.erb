@@ -1,15 +1,16 @@
 <footer>
-  <% if Rails.env.development? %>
-    <%= debug(params) %>
-    <%= "session[:user_id] = #{session[:user_id]}; " %>
-    <%= "session[:manager_id] = #{session[:manager_id]}; " %>
-    <%= "session[:position_id] = #{session[:position_id]}; " %>
-    <%= "session[:level_id] = #{session[:level_id]}; " %>
-    <% unless @user.nil? %>
-      <%= "user_id = #{@user.id}; " %>
-      <%= "position_id = #{@user.position.id}; " %>
-      <%= "level_id = #{@user.level.id}; " %>
-    <% end %>
-    <%= "assessment_id = #{@assessment.id}; " unless @assessment.nil? %>
-  <% end %>
+  <p><pre>   &copy; 2014 ZT Lab</pre></p>
+  <%# if Rails.env.development? %>
+    <%#= debug(params) %>
+    <%#= "session[:user_id] = #{session[:user_id]}; " %>
+    <%#= "session[:manager_id] = #{session[:manager_id]}; " %>
+    <%#= "session[:position_id] = #{session[:position_id]}; " %>
+    <%#= "session[:level_id] = #{session[:level_id]}; " %>
+    <%# unless @user.nil? %>
+      <%#= "user_id = #{@user.id}; " %>
+      <%#= "position_id = #{@user.position.id}; " %>
+      <%#= "level_id = #{@user.level.id}; " %>
+    <%# end %>
+    <%#= "assessment_id = #{@assessment.id}; " unless @assessment.nil? %>
+  <%# end %>
 </footer>

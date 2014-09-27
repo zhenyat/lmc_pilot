@@ -11,18 +11,52 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label 'Фамилия:' %>
+    <%= f.text_field :last_name %>
+
+    <%= f.label 'Имя:' %>
+    <%= f.text_field :first_name %>
+
+    <%= f.label 'Отчество:' %>
+    <%= f.text_field :middle_name %>
+  </div>
 
   <div class="field">
-      <%= f.label :login %><br>
+    <%= f.label 'Магазин:' %>
+    <%= f.collection_select :store_id, Store.all, :id, :title, selected: @user.store.id, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Отдел:' %>
+    <%= f.collection_select :department_id, Department.all, :id, :title, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Руководитель:' %>
+    <%= f.collection_select :manager_id, User.all.order(:last_name), :id, :last_name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Должность:' %>
+    <%= f.collection_select :position_id, Position.all, :id, :title, selected: @user.position.id, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Уровень:' %>
+    <%= f.collection_select :level_id, Level.all, :id, :title, selected: @user.level.id, include_blank: false %>
+  </div>
+  <div class="field">
+      <%= f.label :login %>
     <%= f.text_field :login %>
   </div>
   <div class="field">
-      <%= f.label :password_digest %><br>
-    <%= f.text_field :password_digest %>
+      <%= f.label 'Пароль:' %>
+    <%= f.password_field :password %>
     </div>
   <div class="field">
-      <%= f.label :remember_token %><br>
-    <%= f.text_field :remember_token %>
+      <%= f.label 'Подтвердить пароль:' %>
+    <%= f.password_field :password_confirmation %>
   </div>
   <br>
   <div class="actions">
