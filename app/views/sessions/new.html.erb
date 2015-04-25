@@ -1,6 +1,10 @@
 <% provide(:title, "Sign in") %>
 <h1>Вход в систему</h1>
 
+<!--p><%#= "Time.now:     #{Time.now}" %> </p-->
+<!--p><%#= "Time.current: #{Time.current}" %> </p-->
+<!--p><%#= "Time.zone: #{Time.zone}" %> </p-->
+
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>

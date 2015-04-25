@@ -1,0 +1,6 @@
+PassengerEnabled On
+PassengerLoadShellEnvVars On
+PassengerAppRoot /home/lmprojec/lmc_pilot
+PassengerRuby /usr/local/ruby20/bin/ruby
+RackEnv development
+#RackEnv production
